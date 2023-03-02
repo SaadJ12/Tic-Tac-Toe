@@ -15,16 +15,29 @@ function createPlayer1(playerName) {
 function createPlayer2(playerName) {
     player2 = playerName;
 }
-  
-// const player1 = createPlayer1("Player1");
-// const player2 = createPlayer2("Player2");
 
+let round = 0;
 const boxes = document.querySelectorAll(".box");
 boxes.forEach((box) => {
   box.addEventListener("click", function() {
     if (box.dataset.clicked === "false") {
-      box.innerText = "X";
-      box.dataset.clicked = "true";
+    if (round % 2 === 0) {
+    box.innerText = "X";
+    box.dataset.status = "Player1";
+    } else {
+    box.innerText = "O";
+    box.dataset.status = "Player2";
     }
-  });
+    round++;
+    box.dataset.clicked = "true";
+    boxes.forEach((box) => {
+    if (box.dataset.status === "Player1") {
+    console.log("Player1");
+    } else if (box.dataset.status === "Player2") {
+    console.log("Player2");
+    }
+    box.dataset.status = "";  
+});
+}
+});
 });
