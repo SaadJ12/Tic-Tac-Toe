@@ -16,6 +16,7 @@ function createPlayer2(playerName) {
     player2 = playerName;
 }
 
+// Checks which player clicked the box and mentions it on the box.
 let round = 0;
 const boxes = document.querySelectorAll(".box");
 boxes.forEach((box) => {
@@ -30,14 +31,48 @@ boxes.forEach((box) => {
     }
     round++;
     box.dataset.clicked = "true";
-    boxes.forEach((box) => {
-    if (box.dataset.status === "Player1") {
-    console.log("Player1");
-    } else if (box.dataset.status === "Player2") {
-    console.log("Player2");
-    }
-    box.dataset.status = "";  
-});
+    checkWinner();
 }
-});
+}) });
+
+// Check the winner
+function checkWinner() {
+    const winningCombinations = [
+    [0, 1, 2],
+    [3, 4, 5],
+    [6, 7, 8],
+    [0, 4, 8],
+    [2, 4, 6],
+    [0, 3, 6],
+    [1, 4, 7],
+    [2, 5, 8],
+]; 
+    for (i = 0; i<winningCombinations.length; i++) {
+    const [a, b, c] = winningCombinations[i];
+    const box1 = boxes[a];
+    const box2 = boxes[b];
+    const box3 = boxes[c];
+    
+    if(box1.dataset.status === "Player1" &&
+       box2.dataset.status === "Player1" &&
+       box3.dataset.status === "Player1") {
+    console.log("Player1 Won");
+}   else if (box1.dataset.status === "Player2" &&
+    box2.dataset.status === "Player2" &&
+    box3.dataset.status === "Player2") {
+    console.log("Player2 Won");
+    }
+}  } 
+// Records the player movement
+const container = document.querySelector('.container');
+container.addEventListener('click', function(event) {
+  const clickedBox = event.target.closest('.box');
+  if (clickedBox && clickedBox.dataset.clicked === "true") {
+    const status = clickedBox.dataset.status;
+    if (status === "Player1") {
+      console.log("Player1");
+    } else if (status === "Player2") {
+      console.log("Player2");
+    }
+  }
 });
