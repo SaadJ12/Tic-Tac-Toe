@@ -1,12 +1,12 @@
 const gameboard = {
-    board: ["X", "O"],
+    board: ["Player1: 0", "Player2: 0"],
 };
 
 const displayboard = document.querySelector(".gameboard");
 displayboard.innerText = "gameboard:" + " " +  gameboard.board.join(', ');
 
-let player1;
-let player2 = "Computer";
+let player1 = "Player 1"
+let player2 = "Player 2";
 
 function createPlayer1(playerName) {
     player1 = playerName;
@@ -15,6 +15,15 @@ function createPlayer1(playerName) {
 function createPlayer2(playerName) {
     player2 = playerName;
 }
+
+const player1Input = document.querySelector('#player1-input');
+const player2Input = document.querySelector('#player2-input');
+player1Input.addEventListener('input', function() {
+    createPlayer1(player1Input.value);
+})
+player2Input.addEventListener("input", function() {
+    createPlayer2(player2Input.value);
+})
 
 // Checks which player clicked the box and mentions it on the box.
 let round = 0;
@@ -32,10 +41,14 @@ boxes.forEach((box) => {
     round++;
     box.dataset.clicked = "true";
     checkWinner();
+    tieCheck();
 }
 }) });
 
+
+
 // Check the winner
+const winner = document.querySelector(".winner");
 function checkWinner() {
     const winningCombinations = [
     [0, 1, 2],
@@ -56,11 +69,13 @@ function checkWinner() {
     if(box1.dataset.status === "Player1" &&
        box2.dataset.status === "Player1" &&
        box3.dataset.status === "Player1") {
+    winner.innerText = player1 + " won";
     console.log("Player1 Won");
 }   else if (box1.dataset.status === "Player2" &&
     box2.dataset.status === "Player2" &&
     box3.dataset.status === "Player2") {
-    console.log("Player2 Won");
+    winner.innerText = player2 + " won"
+        console.log("Player2 Won");
     }
 }  } 
 // Records the player movement
@@ -76,3 +91,30 @@ container.addEventListener('click', function(event) {
     }
   }
 });
+// This function checks for tie
+function tieCheck() {
+    let allBoxesClicked = true;
+    boxes.forEach((box) => {
+    if (box.dataset.clicked !== "true") {
+    allBoxesClicked = false;
+      }
+    });
+    if (allBoxesClicked) {
+      console.log("Its a Tie");
+      reset();
+    }
+  }
+  
+function reset() {
+        boxes.forEach((box) => {
+        round = 0;
+        box.innerText = "";
+        box.dataset.status = "false";
+        box.dataset.clicked = "false";
+    })
+}
+
+const restart = document.querySelector('.restart');
+restart.addEventListener('click', function() {
+    reset();
+})

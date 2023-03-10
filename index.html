@@ -10,6 +10,17 @@
     </head>
     <body>
         <div class="gameboard">Gameboard: 0</div>
+        <div class="input-group input-group-sm mb-3">
+        <span class="firstName" id="inputGroup-sizing-sm">Player 1</span>
+        <input type="text" class="form-control" id="player1-input" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
+        </div>
+        <span class="lastName" id="inputGroup-sizing-sm">Player 2</span>
+        <input type="text" class="form-control" id="player2-input" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
+        </div>
+        <div class="main">
+        <button class="start">Start Game</button>
+        <button class="restart">Reset</button>
+        </div>
         <div class="container">
         <div class="row">
         <div class="box box1" data-clicked="false" data-status=""></div>
@@ -26,6 +37,7 @@
         <div class="box box8" data-clicked="false" data-status=""></div>
         <div class="box box9" data-clicked="false" data-status=""></div>
     </div>
+    <div class="winner"></div>
       <script src="script.js" async defer></script>
 </body>
 </html>
