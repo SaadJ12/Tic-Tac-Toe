@@ -42,8 +42,8 @@ boxes.forEach((box) => {
     }
     round++;
     box.dataset.clicked = "true";
-    checkWinner();
     tieCheck();
+    checkWinner();
 }
 }) });
 
@@ -106,8 +106,9 @@ function tieCheck() {
       }
     });
     if (allBoxesClicked) {
-      console.log("Its a Tie");
-      reset();
+    winner.innerText = "It's a Tie";
+    console.log("It's a Tie");
+    reset();
     }
   }
 

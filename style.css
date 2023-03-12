@@ -75,4 +75,25 @@
     align-items: center;
     margin-bottom: 2rem;
   }
+
+  button {
+    background-color: #36b;
+    color: #fff;
+    padding: 0.5rem 1rem;
+    border: none;
+    border-radius: 0.3rem;
+    font-size: 1.2rem;
+    margin: 0 1rem;
+    cursor: pointer;
+  }
+  
+  button:hover {
+    background-color: #256;
+  }
+  
+  .winner {
+    text-align: center;
+    font-size: 2rem;
+    margin-top: 2rem;
+  }
   
