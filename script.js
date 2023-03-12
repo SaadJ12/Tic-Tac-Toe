@@ -1,13 +1,15 @@
 const gameboard = {
-    board: ["Player1: 0", "Player2: 0"],
+    board: [0, 0],
 };
 
+
 const displayboard = document.querySelector(".gameboard");
-displayboard.innerText = "gameboard:" + " " +  gameboard.board.join(', ');
+displayboard.innerText = "Gameboard:" + " " +  gameboard.board.join(', ');
 
 let player1 = "Player 1"
 let player2 = "Player 2";
 
+// Function to create players name 
 function createPlayer1(playerName) {
     player1 = playerName;
 }
@@ -69,25 +71,29 @@ function checkWinner() {
     if(box1.dataset.status === "Player1" &&
        box2.dataset.status === "Player1" &&
        box3.dataset.status === "Player1") {
-    winner.innerText = player1 + " won";
-    console.log("Player1 Won");
-}   else if (box1.dataset.status === "Player2" &&
-    box2.dataset.status === "Player2" &&
-    box3.dataset.status === "Player2") {
-    winner.innerText = player2 + " won"
+        gameboard.board[0] = parseInt(gameboard.board[0]) + 1;
+        displayboard.innerText = "Gameboard:" + " " + gameboard.board.join(', ');
+        winner.innerText = player1 + " won!";
+        console.log("Player1 Won");
+}       else if (box1.dataset.status === "Player2" &&
+        box2.dataset.status === "Player2" &&
+        box3.dataset.status === "Player2") {
+        gameboard.board[1] = parseInt(gameboard.board[1]) + 1;
+        displayboard.innerText = "Gameboard:" + " " + gameboard.board.join(', ');
+        winner.innerText = player2 + " won!"
         console.log("Player2 Won");
     }
 }  } 
 // Records the player movement
 const container = document.querySelector('.container');
 container.addEventListener('click', function(event) {
-  const clickedBox = event.target.closest('.box');
-  if (clickedBox && clickedBox.dataset.clicked === "true") {
+    const clickedBox = event.target.closest('.box');
+    if (clickedBox && clickedBox.dataset.clicked === "true") {
     const status = clickedBox.dataset.status;
     if (status === "Player1") {
-      console.log("Player1");
-    } else if (status === "Player2") {
-      console.log("Player2");
+    console.log("Player1");
+}   else if (status === "Player2") {
+    console.log("Player2");
     }
   }
 });
@@ -104,7 +110,8 @@ function tieCheck() {
       reset();
     }
   }
-  
+
+// Reset the position of players and rounds but gameboard doesn't reset.  
 function reset() {
         boxes.forEach((box) => {
         round = 0;
@@ -117,4 +124,14 @@ function reset() {
 const restart = document.querySelector('.restart');
 restart.addEventListener('click', function() {
     reset();
+})
+
+// to completely restart the game including gameboard
+function refreshPage() {
+    location.reload();
+}
+
+const refresh = document.querySelector(".refresh");
+refresh.addEventListener('click', function() {
+    refreshPage();
 })
